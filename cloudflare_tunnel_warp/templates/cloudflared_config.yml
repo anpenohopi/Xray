@@ -1,0 +1,7 @@
+tunnel: REPLACE_TUNNEL_NAME
+credentials-file: /etc/cloudflared/REPLACE_UUID.json
+
+ingress:
+  - hostname: xray.example.com
+    service: http://localhost:10000
+  - service: http_status:404
