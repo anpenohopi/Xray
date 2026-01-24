@@ -174,7 +174,7 @@ cat > /usr/local/etc/xray/config.json << END
     },
     {
       "listen": "127.0.0.1",
-      "port": "10006",
+      "port": "10004",
       "protocol": "shadowsocks",
       "settings": {
         "clients": [
@@ -253,30 +253,6 @@ cat > /usr/local/etc/xray/config.json << END
     {
       "listen": "127.0.0.1",
       "port": "20001",
-      "protocol": "vmess",
-      "settings": {
-        "clients": [
-          {
-            "id": "$uuid",
-            "alterId": 0
-#vmess-grpc
-          }
-        ]
-      },
-      "streamSettings":{
-        "network": "grpc",
-        "grpcSettings": {
-          "serviceName": "vmess-grpc",
-          "alpn": [
-            "h2",
-            "http/1.1"
-          ]
-        }
-      }
-    },
-    {
-      "listen": "127.0.0.1",
-      "port": "20002",
       "protocol": "vmess",
       "settings": {
         "clients": [
