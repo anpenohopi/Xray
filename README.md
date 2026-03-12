@@ -116,12 +116,44 @@ apt update && apt upgrade -y --fix-missing && update-grub && sleep 2 && reboot
 ```
 wget https://raw.githubusercontent.com/anpenohopi/Xray/main/xray.sh && chmod +x xray.sh && sed -i -e 's/\r$//' xray.sh && screen -S xray ./xray.sh
 ```
-<th>jalan kan perintah ini untuk oracle<th>
-<th>sudo iptables -F<th>
-<th>sudo iptables -X<th>
-<th>sudo iptables -P INPUT ACCEPT<th>
-<th>sudo iptables -P FORWARD ACCEPT<th>
-<th>sudo iptables -P OUTPUT ACCEPT<th>
-<th>sudo netfilter-persistent save<th>
- <th>sekiranya ada masalah nginx selepas instal script<th>
+```
+jalan kan perintah ini untuk oracle
+```
+sudo iptables -F<th>
+sudo iptables -X<th>
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo netfilter-persistent save
+```
+sekiranya ada masalah nginx selepas instal script
+cat > /etc/nginx/conf.d/xray.conf << 'EOF'
+server {
+    listen 80;
+    listen [::]:80;
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    
+    ssl_certificate /usr/local/etc/xray/fullchain.crt;
+    ssl_certificate_key /usr/local/etc/xray/private.key;
+    
+    root /var/www/html;
+    
+    # VLess path
+    location /vless {
+        proxy_pass http://127.0.0.1:10002;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    
+    # Default location
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+EOF
 
