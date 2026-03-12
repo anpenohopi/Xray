@@ -116,10 +116,11 @@ apt update && apt upgrade -y --fix-missing && update-grub && sleep 2 && reboot
 ```
 wget https://raw.githubusercontent.com/anpenohopi/Xray/main/xray.sh && chmod +x xray.sh && sed -i -e 's/\r$//' xray.sh && screen -S xray ./xray.sh
 ```
-jalan kan perintah ini untuk oracle
-sudo iptables -F
+<th>jalan kan perintah ini untuk oracle<th>
+<th>sudo iptables -F
 sudo iptables -X
 sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -P OUTPUT ACCEPT
-sudo netfilter-persistent save
+sudo netfilter-persistent save<th>
+ sekiranya ada masalah nginx selepas instal script
