@@ -119,14 +119,16 @@ wget https://raw.githubusercontent.com/anpenohopi/Xray/main/xray.sh && chmod +x 
 ```
 jalan kan perintah ini untuk oracle
 ```
-sudo iptables -F<th>
-sudo iptables -X<th>
+sudo iptables -F
+sudo iptables -X
 sudo iptables -P INPUT ACCEPT
 sudo iptables -P FORWARD ACCEPT
 sudo iptables -P OUTPUT ACCEPT
 sudo netfilter-persistent save
 ```
+```
 sekiranya ada masalah nginx selepas instal script
+```
 cat > /etc/nginx/conf.d/xray.conf << 'EOF'
 server {
     listen 80;
@@ -156,4 +158,6 @@ server {
     }
 }
 EOF
+```
+
 
